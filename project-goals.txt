@@ -1,0 +1,9 @@
+This python tool will:
+
+1. take an integer input from the user representing the threshold for a significant difference.
+
+2. Loop through all the columns of polling data to and calculate which crossbreaks/sub-groups of the participants are either above or below the national average.
+
+3. Record the following information about the outliers in a datastructure: the name of the question, the sub-group, the difference from the national average.
+
+4. Return this datastructure to the user in a human-readable format.
