@@ -70,7 +70,7 @@ def add_to_output(df, index, i, data, national_average, threshold):
     OUTPUT_TABLE["Crossbreak subgroup"].append(df.iloc[4, i])
     OUTPUT_TABLE["National average for question (%)"].append(national_average * 100)
     OUTPUT_TABLE["Proportion for subgroup (%)"].append(data * 100)
-    OUTPUT_TABLE["Significant difference (%)"].append(data - national_average * 100)
+    OUTPUT_TABLE["Significant difference (%)"].append((data - national_average) * 100)
 
 
 def main():
@@ -81,6 +81,6 @@ def main():
 
 main()
 
-output = pd.DataFrame(OUTPUT_TABLE)
-output.to_excel("output_table.xlsx")
+output = pd.DataFrame(OUTPUT_TABLE, index=None)
+output.to_excel("output_table.xlsx", index=False)
 print(output)
