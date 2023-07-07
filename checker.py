@@ -3,6 +3,14 @@ import pandas as pd
 import openpyxl
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+OUTPUT_TABLE = {
+    "Excel table row number" : [],
+    "Question name" : [],
+    "Crossbreak subgroup" : [],
+    "National average for question (%)" : [],
+    "Proportion for subgroup (%)": [],
+    "Significant difference (%)": []
+}
 
 def get_threshold():
     """
@@ -29,7 +37,7 @@ def scan_data(threshold):
             while i <= 31:
                 data = df.iloc[index, i]
                 if isinstance(data, float):
-                    check_data(index, data, national_average, threshold)
+                    check_data(df, index, i, data, national_average, threshold)
                 else:
                     pass
                 i += 1
@@ -37,17 +45,32 @@ def scan_data(threshold):
             pass
 
 
-def check_data(index, data, national_average, threshold):
+def check_data(df, index, i, data, national_average, threshold):
     """
     A function that compares each value against the national
     average and threshold to see if it is significantly 
     greater or less than expected.
     """
     if data > national_average + threshold:
-        print(f"{index} outlier, greater than")
+        # print(f"{index} outlier, greater than")
+        add_to_output(df, index, i, data, national_average, threshold)
     elif data < national_average - threshold:
-        print(f"{index} outlier, less than")
+        # print(f"{index} outlier, less than")
+        add_to_output(df, index, i, data, national_average, threshold)
 
+
+def add_to_output(df, index, i, data, national_average, threshold):
+    """
+    A function that records the key metadata for each value
+    that exceeds the threshold in either direction, and adds it
+    to the OUTPUT_TABLE global variable.
+    """
+    OUTPUT_TABLE["Excel table row number"].append(index)
+    OUTPUT_TABLE["Question name"].append(df.iloc[index, 1])
+    OUTPUT_TABLE["Crossbreak subgroup"].append(df.iloc[4, i])
+    OUTPUT_TABLE["National average for question (%)"].append(national_average * 100)
+    OUTPUT_TABLE["Proportion for subgroup (%)"].append(data * 100)
+    OUTPUT_TABLE["Significant difference (%)"].append(data - national_average * 100)
 
 
 def main():
@@ -57,3 +80,7 @@ def main():
     scan_data(threshold)
 
 main()
+
+output = pd.DataFrame(OUTPUT_TABLE)
+
+print(output)
