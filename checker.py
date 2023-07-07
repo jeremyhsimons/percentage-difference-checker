@@ -76,11 +76,11 @@ def add_to_output(df, index, i, data, national_average, threshold):
 def main():
     threshold = get_threshold()
     print(f"You have selected the threshold of: {threshold * 100}% difference.")
-    input("Press Enter to run the checker with this threshold.")
+    input("Press 'Enter' to run the checker with this threshold.")
     scan_data(threshold)
 
 main()
 
 output = pd.DataFrame(OUTPUT_TABLE)
-
+output.to_excel("output_table.xlsx")
 print(output)
