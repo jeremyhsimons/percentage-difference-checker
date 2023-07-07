@@ -15,13 +15,12 @@ def get_threshold():
     return threshold_float
 
 
-def check_data(threshold):
+def scan_data(threshold):
     """
     A function that loops through all rows of the data
-    and for each row checks all the float values against
-    the national average column.
+    and for each row and ensuring that only valid data
+    is sent to the checking function
     """
-    print("function call working")
     df = pd.read_excel('poll-data.xlsx', sheet_name="Full Results")
     for index in range(len(df)):
         national_average = (df.iloc[index, 2])
@@ -30,10 +29,7 @@ def check_data(threshold):
             while i <= 31:
                 data = df.iloc[index, i]
                 if isinstance(data, float):
-                    if data > national_average + threshold:
-                        print(f"{index} outlier, greater than")
-                    elif data < national_average - threshold:
-                        print(f"{index} outlier, less than")
+                    check_data(index, data, national_average, threshold)
                 else:
                     pass
                 i += 1
@@ -41,10 +37,23 @@ def check_data(threshold):
             pass
 
 
+def check_data(index, data, national_average, threshold):
+    """
+    A function that compares each value against the national
+    average and threshold to see if it is significantly 
+    greater or less than expected.
+    """
+    if data > national_average + threshold:
+        print(f"{index} outlier, greater than")
+    elif data < national_average - threshold:
+        print(f"{index} outlier, less than")
+
+
+
 def main():
     threshold = get_threshold()
     print(f"You have selected the threshold of: {threshold * 100}% difference.")
     input("Press Enter to run the checker with this threshold.")
-    check_data(threshold)
+    scan_data(threshold)
 
 main()
