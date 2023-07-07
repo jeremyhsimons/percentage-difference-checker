@@ -20,8 +20,28 @@ def main():
     THRESHOLD = get_threshold()
     print(f"You have selected the threshold of: {THRESHOLD * 100}% difference.")
 
-main()
+# main()
 
 df = pd.read_excel('poll-data.xlsx', sheet_name="Full Results")
+test = df.head(20)
+
+for index in range(len(df)):
+    national_average = (df.iloc[index, 2])
+    if isinstance(national_average, float):
+        i = 3
+        while i <= 31:
+            data = df.iloc[index, i]
+            if isinstance(data, float):
+                if data > national_average + THRESHOLD:
+                    print("outlier, greater than")
+                elif data < national_average - THRESHOLD:
+                    print("outlier, less than")
+            else:
+                pass
+            i += 1
+    else:
+        pass
+    
+
 
 # print(df.head(20))
