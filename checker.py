@@ -19,8 +19,17 @@ def get_threshold():
     THRESHOLD global variable.
     """
     threshold_input = input("PLEASE ENTER THE THRESHOLD FOR SIGNIFICANT DIFFERENCE HERE: \n")
-    threshold_float = float(threshold_input) / 100
-    return threshold_float
+    try:
+        if not isinstance(float(threshold_input), float):
+            raise ValueError (
+                "Please enter a valid number"
+            )
+        else:
+            threshold_float = float(threshold_input) / 100
+            return threshold_float  
+    except ValueError as e:
+        print(f"Invalid response: {e}")
+        return False
 
 
 def scan_data(threshold):
@@ -52,10 +61,8 @@ def check_data(df, index, i, data, national_average, threshold):
     greater or less than expected.
     """
     if data > national_average + threshold:
-        # print(f"{index} outlier, greater than")
         add_to_output(df, index, i, data, national_average, threshold)
     elif data < national_average - threshold:
-        # print(f"{index} outlier, less than")
         add_to_output(df, index, i, data, national_average, threshold)
 
 
@@ -65,7 +72,7 @@ def add_to_output(df, index, i, data, national_average, threshold):
     that exceeds the threshold in either direction, and adds it
     to the OUTPUT_TABLE global variable.
     """
-    OUTPUT_TABLE["Excel table row number"].append(index)
+    OUTPUT_TABLE["Excel table row number"].append(index + 2)
     OUTPUT_TABLE["Question name"].append(df.iloc[index, 1])
     OUTPUT_TABLE["Crossbreak subgroup"].append(df.iloc[4, i])
     OUTPUT_TABLE["National average for question (%)"].append(national_average * 100)
@@ -75,12 +82,14 @@ def add_to_output(df, index, i, data, national_average, threshold):
 
 def main():
     threshold = get_threshold()
+    if not threshold:
+        print("-- EXITING PROGRAM --")
+        return
     print(f"You have selected the threshold of: {threshold * 100}% difference.")
     input("Press 'Enter' to run the checker with this threshold.")
     scan_data(threshold)
+    output = pd.DataFrame(OUTPUT_TABLE, index=None)
+    output.to_excel("output_table.xlsx", index=False)
+    print(output)
 
 main()
-
-output = pd.DataFrame(OUTPUT_TABLE, index=None)
-output.to_excel("output_table.xlsx", index=False)
-print(output)
