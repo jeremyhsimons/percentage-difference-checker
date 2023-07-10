@@ -38,7 +38,7 @@ def scan_data(threshold):
     and for each row and ensuring that only valid data
     is sent to the checking function
     """
-    df = pd.read_excel('poll-data.xlsx', sheet_name="Full Results")
+    df = pd.read_excel('poll_data.xlsx', sheet_name="Full Results")
     for index in range(len(df)):
         national_average = (df.iloc[index, 2])
         if isinstance(national_average, float):
