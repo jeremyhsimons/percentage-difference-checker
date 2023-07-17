@@ -62,7 +62,6 @@ If, for any reason, the program does not work as described in the steps already 
 
 ## Ideas for future development (beyond the scope of this initial project)
 
-* Implementation of a function that can record the original question/base for each subset of options that poll respondents can select and record it in a new column in the output_table.xlsx file. This could be done using the contents sheet of the excel file, but it is a more complex problem to solve since 
 * Use of a library such as Streamlit (Python) to create a frontend dashboard. This would allow the user to input their threshold in a simple webform and for the program to generate a neatly-formatted table of results, rather than operating everything through the terminal.
 * Creation of a backend database using Mongo DB where csv versions of the polling data could be stored, retrieved, updated, and deleted for future use.
 * Creation of a full-stack system using the two previous ideas mentioned that allows users (likely data team members from Public First) to select the poll project they want to look at and run automated analyses of the data 
