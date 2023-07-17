@@ -71,7 +71,7 @@ def find_individual_tables():
     for index in range(len(df2)):
         row = df2.iloc[index]
         k = 0
-        while j < row.shape[0]:
+        while k < row.shape[0]:
             if df2.iloc[index, k] == 'Individual Tables':
                 return [index, k]
             else:
@@ -86,7 +86,7 @@ def store_questions():
     for row in range(len(df2)):
         question_dict = {
             'question': '',
-            'number'; 0
+            'number': ''
         }
         question = df2.iloc[row, TABLES_CELL[1]]
         if isinstance(question, str) and question != 'Individual Tables':
