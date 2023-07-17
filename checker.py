@@ -13,6 +13,8 @@ TOTAL_CELL = []
 
 TABLES_CELL = []
 
+QUESTIONS = []
+
 OUTPUT_TABLE = {
     "Excel table row number" : [],
     "Question name" : [],
@@ -81,7 +83,19 @@ def store_questions():
     A function to loop through the question rows and store
     them in a list of dictionaries called QUESTIONS.
     """
-    for row in range(len(df2))
+    for row in range(len(df2)):
+        question_dict = {
+            'question': '',
+            'number'; 0
+        }
+        question = df2.iloc[row, TABLES_CELL[1]]
+        if isinstance(question, str) and question != 'Individual Tables':
+            question_dict['question'] = question
+            number = df2.iloc[row, TABLES_CELL[1] + 1]
+            question_dict['number'] = number
+            QUESTIONS.append(question_dict)
+        else:
+            pass
 
 
 def scan_data(threshold):
@@ -147,13 +161,11 @@ def main():
     tables_cell = find_individual_tables()
     TABLES_CELL.append(tables_cell[0])
     TABLES_CELL.append(tables_cell[1])
-    scan_data(threshold)
-    output = pd.DataFrame(OUTPUT_TABLE, index=None)
-    output.to_excel("output_table.xlsx", index=False)
-    print(output)
+    store_questions()
+    print(QUESTIONS)
+    # scan_data(threshold)
+    # output = pd.DataFrame(OUTPUT_TABLE, index=None)
+    # output.to_excel("output_table.xlsx", index=False)
+    # print(output)
 
-# main()
-
-
-
-
+main()
