@@ -44,7 +44,6 @@ def find_total_cell():
     A function that loops through rows and columns 
     and returns the index for each.
     """
-    df = pd.read_excel('poll_data.xlsx', sheet_name="Full Results")
     for index in range(len(df)):
         row = df.iloc[index]
         j = 0
@@ -61,7 +60,6 @@ def scan_data(threshold):
     and for each row and ensuring that only valid data
     is sent to the checking function
     """
-    df = pd.read_excel('poll_data.xlsx', sheet_name="Full Results")
     for row in range(len(df)):
         national_average = (df.iloc[row, TOTAL_CELL[1]])
         if isinstance(national_average, float):
@@ -118,4 +116,9 @@ def main():
     output.to_excel("output_table.xlsx", index=False)
     print(output)
 
-main()
+# main()
+
+df2 = pd.read_excel('poll_data.xlsx', sheet_name="Contents")
+
+
+

@@ -20,14 +20,16 @@ New users should follow the steps shown in the user manual below to set up an ea
 1. Download the latest version of python and install it on your PC.
 2. Download and install Visual Studio Code (Microsoft's free code editor).
 3. Create a new folder on your desktop, and place three files inside of it: checker.py, the polling data excel file, and an empty excel file.
-4. Make sure the polling data file is renamed 'poll_data', or the program will not work.
+4. Make sure the polling data excel file is renamed 'poll_data', or the program will not work.
 5. Make sure the empty excel file is renamed 'output_table', or the program will not work.
 6. Once your folder is set, right click on the checker.py file and open with Visual Studio Code.
 7. Once the editor has loaded, select the file icon in the top left corner of the screen, click on open folder, and select the new folder you created.
-8. Ensure that the version of python VSCode is using matches the version you have installed on your PC.
+8. Ensure that the version of python VSCode is using matches the version you have installed on your PC. You can change it on VSCode if needed.
 9. If there is no terminal at the bottom of the screen select the terminal on the top toolbar and click on new terminal.
-10. In the terminal, run the following 2 commands to install the 3rd party dependencies into the code: pip3 install pandas, pip3 install openpyxl
-11. To run the program, type 'python3 checker.py' into the terminal and hit 'enter'. If that does not work try the command 'python checker.py'. Basic instructions for running python files from a terminal can be found [here](https://learn.microsoft.com/en-us/windows/python/beginners).
+10. In the terminal, run the following 2 commands to install the 3rd party dependencies into the code: 
+- <strong>pip3 install pandas</strong> (type this into the terminal, press 'Enter', and wait for the package to install before doing anything else) 
+- <strong>pip3 install openpyxl.</strong> 
+11. To run the program, type 'python3 checker.py' into the terminal and hit 'Enter'. If that does not work try the command 'python checker.py'. Some more detailed instructions for running python files from a terminal can be found [here](https://learn.microsoft.com/en-us/windows/python/beginners).
 
 ### Using the program for the Google UK poll data
 
@@ -35,28 +37,35 @@ New users should follow the steps shown in the user manual below to set up an ea
 2. When prompted, type a number (the threshold for significant difference) into the terminal (e.g. 25).
 3. If you type invalid data here, the program will exit and you will have to start again from step 1 of this section of the manual.
 4. You should then get a prompt to tell you that the program will check all data for a 25% difference from the national averages of the poll data.
-5. Hit 'enter' on your keyboard to run the checking function. There may be a few seconds' wait while the calculations are completed.
+5. Hit 'enter' on your keyboard to run the checking function. There may be a few seconds' wait depending on the amount of data to process.
 6. A truncated table of the collated data points that exceed the significant difference threshold (either above or below) will be displayed in the terminal.
 7. Open the folder where you placed the three files. Open 'output_table.xlsx'
 8. The data posted to the terminal should also appear here and may now be copied elsewhere for editing.
 9. OPTIONAL: re-run the program using these steps, but this time enter a different threshold. The output_table.xlsx file should now be re-written with the new set of results.
 10. Beware, the output table in the folder on your desktop must always remain where it is in order to work. It is recommended that any result sets you want to save for future use should be copied and saved to a different directory on your PC.
 
+### Output table
+The output_table.xlsx file should show six columns of information:
+1. The table row number from the excel file.
+2. The question option
+3. The 
+
 ### Using the program for future Public First polls
 
-This program is designed on the assumption that all polling data tables produced by Public First have the same format in terms of rows and columns. Therefore it should be possible to re-use this tool for any future poll that Public First carries out. If this is ever not the case, the following instructions will help a non-programmer to adapt the program for future polling data.
+This program is designed to work with the Google polling data provided by Public First, as well as similar excel tables which have a column marked 'Total' within an excel worksheet called 'Full Results'. These two pieces of data from the excel table are the only two hard-coded pieces of information in this python script. If users wish to run the program with worksheets using different names, two lines of code will have to be changed.
 
-1. Open the checker.py file in Visual Studio Code.
-1. Scroll down to line 43 and find the variable named 'national_average'. This is currently hard-coded to the 'total' column in the polling data excel file. This is the third column at the moment. If the 'total' column is ever not the third, set the national_average variable to equal ```df.iloc[index, (excel_col_number - 1)]```, where excel_col_number = the column in excel where total values are stored.
-1. After this set i to equal the column value + 1, and change the default value of 31 to match 1 less than the number of total columns in the excel file.
-1. Repeeat step 2 on line 76: ```OUTPUT_TABLE["Question name"].append(df.iloc[index, (excel_col_number - 1)])``` where excel_col_number = the column where questions/response options are stored.
-1. Repeat step 2 on line 77: ```OUTPUT_TABLE["Crossbreak subgroup"].append(df.iloc[(excel_row_number - 2), i])``` where excel_row_number = the row where the crossbreak categories are listed. On the google poll file, this is currently row 6
+Please note that this script will not work on other tables of data. It is only designed to work on the Full Results sheet as displayed in the poll_data.xlsx file.
 
+## Reporting bugs
 
-## Ideas for future development
+If, for any reason, the program does not work as described in the steps already outlined. Please contact the developer at jeremy.h.simons@outlook.com for further assistance in setup.
 
-* A function that can record the original question/the base for each subset of options that poll respondents can select and record it in a new column in the output_table.xlsx file.
-* Use a library such as Streamlit (Python) to create a frontend dashboard and formatted table for the program user.
+## Ideas for future development (beyond the scope of this initial project)
+
+* Implementation of a function that can record the original question/base for each subset of options that poll respondents can select and record it in a new column in the output_table.xlsx file. This could be done using the contents sheet of the excel file, but it is a more complex problem to solve since 
+* Use of a library such as Streamlit (Python) to create a frontend dashboard. This would allow the user to input their threshold in a simple webform and for the program to generate a neatly-formatted table of results, rather than operating everything through the terminal.
+* Creation of a backend database using Mongo DB where csv versions of the polling data could be stored, retrieved, updated, and deleted for future use.
+* Creation of a full-stack system using the two previous ideas mentioned that allows users (likely data team members from Public First) to select the poll project they want to look at and run automated analyses of the data 
 
 ## Credits / 3rd party and opensource code used
 Two 3rd party Python libraries were used to develop this project for Public First:
