@@ -1,7 +1,6 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 3rd PARTY IMPORTS
 import pandas as pd
 import openpyxl
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ GLOBAL VARIABLES
 
@@ -17,7 +16,8 @@ QUESTIONS = []
 
 OUTPUT_TABLE = {
     "Excel table row number" : [],
-    "Question name" : [],
+    "Question": [],
+    "Question option" : [],
     "Crossbreak subgroup" : [],
     "National average for question (%)" : [],
     "Proportion for subgroup (%)": [],
@@ -86,13 +86,16 @@ def store_questions():
     for row in range(len(df2)):
         question_dict = {
             'question': '',
-            'number': ''
+            'number': '',
+            'base': '',
         }
         question = df2.iloc[row, TABLES_CELL[1]]
         if isinstance(question, str) and question != 'Individual Tables':
             question_dict['question'] = question
             number = df2.iloc[row, TABLES_CELL[1] + 1]
             question_dict['number'] = number
+            base = df2.iloc[row, TABLES_CELL[1] + 2]
+            question_dict['base'] = base
             QUESTIONS.append(question_dict)
         else:
             pass
@@ -131,6 +134,25 @@ def check_data(df, index, i, data, national_average, threshold):
         add_to_output(df, index, i, data, national_average, threshold)
 
 
+def check_question_number(index):
+    """
+    A function to check the data excel row number against the 
+    question numbers to assess which question 
+    the data belongs to.
+    """
+    h = 0
+    while h < (len(QUESTIONS)):
+        if QUESTIONS[h]["number"] != 'nan':
+            if float(QUESTIONS[h]["number"]) > index + 2:
+                return f"{QUESTIONS[h-1]['question']}, {QUESTIONS[h-1]['base']}"
+            elif index + 2 > float(QUESTIONS[-1]["number"]):
+                return f"{QUESTIONS[-1]['question']}, {QUESTIONS[-1]['base']}"
+            else:
+                pass
+        h += 1
+
+
+
 def add_to_output(df, index, i, data, national_average, threshold):
     """
     A function that records the key metadata for each value
@@ -138,7 +160,9 @@ def add_to_output(df, index, i, data, national_average, threshold):
     to the OUTPUT_TABLE global variable.
     """
     OUTPUT_TABLE["Excel table row number"].append(index + 2)
-    OUTPUT_TABLE["Question name"].append(df.iloc[index, 1])
+    question = check_question_number(index)
+    OUTPUT_TABLE["Question"].append(question)
+    OUTPUT_TABLE["Question option"].append(df.iloc[index, 1])
     OUTPUT_TABLE["Crossbreak subgroup"].append(df.iloc[TOTAL_CELL[0], i])
     OUTPUT_TABLE["National average for question (%)"].append(national_average * 100)
     OUTPUT_TABLE["Proportion for subgroup (%)"].append(data * 100)
@@ -162,10 +186,9 @@ def main():
     TABLES_CELL.append(tables_cell[0])
     TABLES_CELL.append(tables_cell[1])
     store_questions()
-    print(QUESTIONS)
-    # scan_data(threshold)
-    # output = pd.DataFrame(OUTPUT_TABLE, index=None)
-    # output.to_excel("output_table.xlsx", index=False)
-    # print(output)
+    scan_data(threshold)
+    output = pd.DataFrame(OUTPUT_TABLE, index=None)
+    output.to_excel("output_table.xlsx", index=False)
+    print(output)
 
 main()
