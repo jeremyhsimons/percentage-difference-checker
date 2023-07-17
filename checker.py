@@ -1,11 +1,17 @@
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 3rd party imports
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 3rd PARTY IMPORTS
 import pandas as pd
 import openpyxl
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ GLOBAL VARIABLES
+
+# df stands for dataframe
 df = pd.read_excel('poll_data.xlsx', sheet_name="Full Results")
+df2 = pd.read_excel('poll_data.xlsx', sheet_name="Contents")
 
 TOTAL_CELL = []
+
+TABLES_CELL = []
 
 OUTPUT_TABLE = {
     "Excel table row number" : [],
@@ -16,6 +22,7 @@ OUTPUT_TABLE = {
     "Significant difference (%)": []
 }
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ SCRIPT LOGIC
 
 def get_threshold():
     """
@@ -52,6 +59,29 @@ def find_total_cell():
                 return [index, j]
             else:
                 j += 1
+
+
+def find_individual_tables():
+    """
+    A function to scan the 'contents' sheet and return the coords
+    of the cell named 'Individual Tables'.
+    """
+    for index in range(len(df2)):
+        row = df2.iloc[index]
+        k = 0
+        while j < row.shape[0]:
+            if df2.iloc[index, k] == 'Individual Tables':
+                return [index, k]
+            else:
+                k += 1
+
+
+def store_questions():
+    """
+    A function to loop through the question rows and store
+    them in a list of dictionaries called QUESTIONS.
+    """
+    for row in range(len(df2))
 
 
 def scan_data(threshold):
@@ -102,6 +132,9 @@ def add_to_output(df, index, i, data, national_average, threshold):
 
 
 def main():
+    """
+    A function to control the logic flow of all other functions.
+    """
     threshold = get_threshold()
     if not threshold:
         print("-- EXITING PROGRAM --")
@@ -111,6 +144,9 @@ def main():
     total_cell = find_total_cell()
     TOTAL_CELL.append(total_cell[0])
     TOTAL_CELL.append(total_cell[1])
+    tables_cell = find_individual_tables()
+    TABLES_CELL.append(tables_cell[0])
+    TABLES_CELL.append(tables_cell[1])
     scan_data(threshold)
     output = pd.DataFrame(OUTPUT_TABLE, index=None)
     output.to_excel("output_table.xlsx", index=False)
@@ -118,7 +154,6 @@ def main():
 
 # main()
 
-df2 = pd.read_excel('poll_data.xlsx', sheet_name="Contents")
 
 
 
