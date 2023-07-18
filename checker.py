@@ -21,6 +21,7 @@ OUTPUT_TABLE = {
     "Crossbreak subgroup" : [],
     "National average for question (%)" : [],
     "Proportion for subgroup (%)": [],
+    "Threshold for significant difference (%)": [],
     "Significant difference (%)": []
 }
 
@@ -166,6 +167,7 @@ def add_to_output(df, index, i, data, national_average, threshold):
     OUTPUT_TABLE["Crossbreak subgroup"].append(df.iloc[TOTAL_CELL[0], i])
     OUTPUT_TABLE["National average for question (%)"].append(national_average * 100)
     OUTPUT_TABLE["Proportion for subgroup (%)"].append(data * 100)
+    OUTPUT_TABLE["Threshold for significant difference (%)"].append(threshold * 100)
     OUTPUT_TABLE["Significant difference (%)"].append((data - national_average) * 100)
 
 

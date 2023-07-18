@@ -40,7 +40,7 @@ This should return the version of python you just installed on your PC. This is 
 8. Once the editor has loaded, select the file icon in the top left corner of the screen, click on open folder, and select the new folder you created.
 9. If there is no terminal at the bottom of the screen select the terminal on the top toolbar and click on new terminal.
 10. In the terminal, run the following 2 commands to install the 3rd party dependencies into the code: 
-- <strong>pip3 install pandas</strong> (type this into the terminal, press 'Enter', and wait for the package to install before installing the next one. You will know when the installation has finished because your typing input will appear in the terminal again.)
+- <strong>pip3 install pandas</strong> (type this into the terminal, press 'Enter', and wait for the package to install before installing the next one. You will know when the installation has finished because the file path for the script's folder will appear in the terminal again.)
 - <strong>pip3 install openpyxl</strong>
 11. To run the program, type 'python checker.py' into the terminal and hit 'Enter'. If that does not work try the command 'python3 checker.py'. Some more detailed instructions for running python files from a terminal can be found [here](https://learn.microsoft.com/en-us/windows/python/beginners).
 
