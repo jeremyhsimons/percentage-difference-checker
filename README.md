@@ -5,7 +5,7 @@ This is a python tool that takes input from the user to specify the threshold fo
 
 The tool is currently a command-line based project which requires a virtual environment such as a code editor to operate. There is, however, scope for this program to be developed into a full-stack, web-hosted application with an interactive front end and polling data stored in a NoSQL database. Currently, this tool requires a small amount of setup to use locally on the user's desktop device.
 
-New users should follow the steps shown in the user manual below to set up an easy-to-use code editor, and to set up Python on their machine.
+New users should follow the steps shown in the user manual below to set up an easy-to-use code editor, and to set up Python on their machine. This will allow the user to run the tool as many times as they want in future, and potentially tweak/update the code if needed.
 
 ## Project goals
 
