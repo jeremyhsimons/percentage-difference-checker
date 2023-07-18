@@ -17,32 +17,71 @@ New users should follow the steps shown in the user manual below to set up an ea
 
 ### Setup for running the program locally.
 
-1. Download the latest version of python and install it on your PC. This can be found [here](https://www.python.org/downloads/).
+1. Download the latest version of python and install it on your PC. This can be found [here](https://www.python.org/downloads/). When running the installer, make sure to select the option to 'Add python.exe to PATH'. If you do not do this, python may not work on your machine. Guide to python installation can be found [here](https://www.onmsft.com/how-to/how-to-download-and-install-python/)
+
+
+<hr>
+
 <img src="docs/python-site.png" alt="a screenshot of the python website">
+
+<hr>
 
 
 
 2. Download and install Visual Studio Code (Microsoft's free code editor). This can be found [here](https://code.visualstudio.com/). Setup instructions can be found [here](https://code.visualstudio.com/docs/setup/windows), although it should be very easy to get up and running. 
+
+
+<hr>
+
 <img src="docs/vscode-site.png" alt="a screenshot of the VSCode website">
 
+<hr>
 
 
-3. Once it is installed, open the program. When it loads, select the terminal option from the top toolbar. Click on new terminal. When it loads, type the following command into the terminal and hit 'enter': python --verson
-This should return the version of python you just installed on your PC. This is an optional test to make sure python is installed on your PC. For any further issues, please follow this [guide](https://www.youtube.com/watch?v=9o4gDQvVkLU) for setting up Python = VSCode on windows.
+
+3. Once Visual Studio Code is installed, open the program. Select the squares icon on the left-hand menu. Search for the python extension and click install. It may take around 30 seconds to install.
+
+
+<hr>
+
+<img src="docs/python-extension.png" alt="a screenshot of the VSCode extensions menu and python extension.">
+
+<hr>
+
+
+
+4. Restart Visual Studio Code. When you re-open it, select the terminal option from the top toolbar. Click on new terminal. When it loads, type the following command into the terminal and hit 'enter': python --verson
+This should return the version of python you just installed on your PC. This is an optional test to make sure python is installed on your PC. For any further issues, please follow this [guide](https://www.youtube.com/watch?v=9o4gDQvVkLU) for setting up Python and VSCode on windows.
+
+
+<hr>
+
 <img src="docs/python-version.png" alt="a screenshot of the python --version command.">
 
+<hr>
 
 
-4. Create a new folder on your desktop, and place three files inside of it: checker.py, the polling data excel file, and an empty excel file.
-5. Make sure the polling data excel file is renamed 'poll_data', or the program will not work.
-6. Make sure the empty excel file is renamed 'output_table', or the program will not work.
-7. Once your folder is set, right click on the checker.py file and open with Visual Studio Code.
-8. Once the editor has loaded, select the file icon in the top left corner of the screen, click on open folder, and select the new folder you created.
-9. If there is no terminal at the bottom of the screen select the terminal on the top toolbar and click on new terminal.
-10. In the terminal, run the following 2 commands to install the 3rd party dependencies into the code: 
+
+5. Create a new folder on your desktop, and place three files inside of it: checker.py, the polling data excel file, and the output excel file provided.
+6. Make sure the polling data excel file is renamed 'poll_data', or the program will not work.
+7. Make sure the empty excel file is renamed 'output_table', or the program will not work.
+8. Once your folder is set, right click on the checker.py file and open with Visual Studio Code.
+9. Once the editor has loaded, select the file icon in the top left corner of the screen, click on open folder, and click on 'open folder' select the new folder you created. Once you've done this, three files should be visible in the explorer section next to the left-hand toolbar. The code will soon be ready to run from the terminal once we have installed a couple of libraries.
+
+
+<hr>
+
+<img src="docs/folder-in-vscode.png" alt="working directory in vscode.">
+
+<hr>
+
+
+
+10. If there is no terminal at the bottom of the screen select the terminal on the top toolbar and click on new terminal.
+11. In the terminal, run the following 2 commands to install the 3rd party dependencies into the code: 
 - <strong>pip3 install pandas</strong> (type this into the terminal, press 'Enter', and wait for the package to install before installing the next one. You will know when the installation has finished because the file path for the script's folder will appear in the terminal again.)
 - <strong>pip3 install openpyxl</strong>
-11. To run the program, type 'python checker.py' into the terminal and hit 'Enter'. If that does not work try the command 'python3 checker.py'. Some more detailed instructions for running python files from a terminal can be found [here](https://learn.microsoft.com/en-us/windows/python/beginners).
+12. To run the program, type 'python checker.py' into the terminal and hit 'Enter'. If that does not work try the command 'python3 checker.py'. Some more detailed instructions for running python files from a terminal can be found [here](https://learn.microsoft.com/en-us/windows/python/beginners).
 
 ### Using the program for the Google UK poll data
 
@@ -83,8 +122,7 @@ This should return the version of python you just installed on your PC. This is 
 11. If you would like to run the checker on a different poll's results, simply remove the old poll_data.xlsx file from the folder and add a new results excel file (making sure to rename it 'poll_data').
 
 ### Output table
-The output_table.xlsx file should show seven columns of information:
-<img src="docs/excel-output.png" alt="a screenshot of an example output table.">
+The output_table.xlsx file should show eight columns of information:
 
 1. The table row number from the excel file.
 2. The question and respondent base.
@@ -92,7 +130,8 @@ The output_table.xlsx file should show seven columns of information:
 4. The crossbreak group (i.e. Wales means respondents who were based in Wales).
 5. The percentage of all respondents who chose this option for this question.
 6. The percentage of the crossbreak who chose this response for this question.
-7. The difference between these two percentages (positive number indicates significantly higher, negative number indicates significantly lower).
+7. The threshold set by the user.
+8. The difference between these two percentages (positive number indicates significantly higher, negative number indicates significantly lower).
 
 ### Using the program for future Public First polls
 
