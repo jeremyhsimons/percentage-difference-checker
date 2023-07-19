@@ -50,7 +50,7 @@ New users should follow the steps shown in the user manual below to set up an ea
 
 
 
-4. Restart Visual Studio Code. When you re-open it, select the terminal option from the top toolbar. Click on new terminal. When it loads, type the following command into the terminal and hit 'enter': python --verson
+4. Restart Visual Studio Code. When you re-open it, select 'Terminal' option from the top toolbar. Click on the 'new terminal' option. When it loads, type the following command into the terminal and hit 'enter': python --verson.
 This should return the version of python you just installed on your PC. This is an optional test to make sure python is installed on your PC. For any further issues, please follow this [guide](https://www.youtube.com/watch?v=9o4gDQvVkLU) for setting up Python and VSCode on windows.
 
 
@@ -63,10 +63,10 @@ This should return the version of python you just installed on your PC. This is 
 
 
 5. Create a new folder on your desktop, and place three files inside of it: checker.py, the polling data excel file, and the output excel file provided.
-6. Make sure the polling data excel file is renamed 'poll_data', or the program will not work.
-7. Make sure the empty excel file is renamed 'output_table', or the program will not work.
-8. Once your folder is set, right click on the checker.py file and open with Visual Studio Code.
-9. Once the editor has loaded, select the file icon in the top left corner of the screen, click on open folder, and click on 'open folder' select the new folder you created. Once you've done this, three files should be visible in the explorer section next to the left-hand toolbar. The code will soon be ready to run from the terminal once we have installed a couple of libraries.
+6. Make sure the polling data excel file is named 'poll_data', or the program will not work.
+7. Make sure the empty excel file is named 'output_table', or the program will not work.
+8. Once your folder is created, right click on the checker.py file and open with Visual Studio Code.
+9. Once the editor has loaded, select the file icon at the top left-hand toolbar, click on 'open folder', and select the new folder you created. Once you've done this, three files should be visible in the explorer section next to the left-hand toolbar. The code will soon be ready to run from the terminal once we have installed a couple of libraries.
 
 
 <hr>
@@ -77,11 +77,11 @@ This should return the version of python you just installed on your PC. This is 
 
 
 
-10. If there is no terminal at the bottom of the screen select the terminal on the top toolbar and click on new terminal.
-11. In the terminal, run the following 2 commands to install the 3rd party dependencies into the code: 
+10. If there is no terminal at the bottom of the screen, open a new one by selecting 'Terminal' on the top toolbar and clicking on 'new terminal'.
+11. In the terminal, run the following 2 commands to install the 3rd party dependencies into your editor: 
 - <strong>pip3 install pandas</strong> (type this into the terminal, press 'Enter', and wait for the package to install before installing the next one. You will know when the installation has finished because the file path for the script's folder will appear in the terminal again.)
 - <strong>pip3 install openpyxl</strong>
-12. To run the program, type 'python checker.py' into the terminal and hit 'Enter'. If that does not work try the command 'python3 checker.py'. Some more detailed instructions for running python files from a terminal can be found [here](https://learn.microsoft.com/en-us/windows/python/beginners).
+12. The program is now ready to use! To run the program, type 'python checker.py' into the terminal and hit 'Enter'. Some more detailed instructions for running python files from a terminal can be found [here](https://learn.microsoft.com/en-us/windows/python/beginners).
 
 ### Using the program for the Google UK poll data
 
@@ -145,9 +145,9 @@ If, for any reason, the setup or program does not work as described in the steps
 
 ## Ideas for future development (beyond the scope of this initial project)
 
-* Use of a library such as Streamlit (Python) to create a frontend dashboard. This would allow the user to input their threshold in a simple webform and for the program to generate a neatly-formatted table of results, rather than operating everything through the terminal.
-* Creation of a backend database using Mongo DB where csv versions of the polling data could be stored, retrieved, updated, and deleted for future use.
-* Creation of a full-stack system using the two previous ideas mentioned that allows users (likely data team members from Public First) to select the poll project they want to look at and run automated analyses of the data. The advantage of this would be that users would not need to set up python/coding IDEs on their devices to run the tool.
+* Use of a library such as Streamlit (Python) to create a frontend user interface. This could allow the user to input their threshold in a simple webform and for the program to generate a neatly-formatted table of results, rather than operating everything through the terminal.
+* Creation of a backend database using MongoDB where csv versions of the polling data could be stored, retrieved, updated, and deleted for future use.
+* Creation of a full-stack system, using the two previous ideas, that allows users (likely data team members from Public First) to select the polling project they want to look at and run automated analyses of the data. The advantage of this would be that users would not need to set up python/coding IDEs on their devices to run the tool.
 
 ## Credits / 3rd party and opensource code used
 Two 3rd party Python libraries were used to develop this project for Public First:
